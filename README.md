@@ -15,7 +15,7 @@ Folgendes sollte für den ersten Start des Projekts eingerichtet werden:
 ***Wichtig:*** Hier sind die Anforderungen mit Installationsanweisungen für Windows. Beachte, dass das Terminal(Eingabeaufforderung) als <ins>Administrator</ins> ausgeführt werden sollte!
 
 1. ***Python:***
-    - Laden Sie "Python" von der folgenden Website herunter und befolge die Anweisungen: https://www.python.org/downloads/
+    - Lade "Python" von der folgenden Website herunter und befolge die Anweisungen: https://www.python.org/downloads/
     - Falls die Installation Probleme bereitet, kann eine aktuelle Version auch über den Windows Store heruntergeladen werden
     - Überprüfe, ob die Installation erfolgreich mit folgendem Befehl im Terminal: `python --version`
 
