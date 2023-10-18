@@ -10,6 +10,8 @@
 - **[main.py](main.py):** Main Datei, von der aus die verschiedenen Aufgaben bzw. Programme und Funktionen ausgeführt
   werden
 - **[snTask.py](snTask.py):** <ins>SN</ins> Aufgabe mit Funktionen für Berechnung und Genauigkeit
+- **[tryOut.py](tryOut.py):** Funktionen, zum Ausprobieren bzw. die Aufgaben erweitern (<ins>keine</ins> direkte
+  Relevanz für die Aufgaben)
 
 ## Vor dem ersten Start
 
