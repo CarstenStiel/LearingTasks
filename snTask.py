@@ -11,8 +11,7 @@ def sn1Recursive(N, n=1):  # Nur N als Parameter eingeben, da n beim Start 1 ble
         # Wenn n kleiner als 2N ist, dann führe die Berechnung aus
         else:
             cal = pow((-1), n) * (n / (n + 1))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1))
-            return cal + sn1Recursive(N,
-                                      n + 1)  # Gibt die Berechung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
+            return cal + sn1Recursive(N, n + 1)  # Gibt die Berechnung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
     # Wenn N keine ganze Zahl oder kleiner 1 ist, dann wird eine Exception geworfen
     else:
         raise ValueError("N muss eine ganze Zahl mindestens der Größe 1 sein!")
@@ -23,8 +22,7 @@ def sn1For(N):  # Nur N als Parameter eingeben
     # Wenn N eine ganze Zahl mindestens der Größe eins ist, dann führe die Berechnung aus
     if isinstance(N, int) and N >= 1:
         res = 0  # Initialisiere das Ergebnis(result) mit dem Wert 0
-        for n in range(1, (
-                                  2 * N) + 1):  # Für jedes n von 1 bis 2N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
+        for n in range(1, (2 * N) + 1):  # Für jedes n von 1 bis 2N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
             res += pow((-1), n) * (n / (n + 1))  # Addiere die Berechnung auf das Ergebnis
         return res  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnis zurück
     # Wenn N keine ganze Zahl oder kleiner 1 ist, dann wird eine Exception geworfen
@@ -54,8 +52,7 @@ def sn2For(N):  # Nur N als Parameter eingeben
     # Wenn N eine ganze Zahl mindestens der Größe eins ist, dann führe die Berechnung aus
     if isinstance(N, int) and N >= 1:
         res = 0  # Initialisiere das Ergebnis(result) mit dem Wert 0
-        for n in range(1,
-                       N + 1):  # Für jedes n von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
+        for n in range(1, N + 1):  # Für jedes n von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
             res += (1 / (2 * n * ((2 * n) + 1)))  # Berechnung(calculation)
         return res  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnis zurück
     # Wenn N keine ganze Zahl oder kleiner 1 ist, dann wird eine Exception geworfen
@@ -74,7 +71,7 @@ def precision(res):
 # Diese Funktion gibt ein Ergebnis in einfacher Genauigkeit (32bit) zurück.
 # Hier kann man ggf auch noch prüfen, ob ein Zahlenwert eingegeben wurde!
 def singlePrecision(res):
-    return np.float32(res)  #
+    return np.float32(res)
 
 
 # Diese Funktion gibt ein Ergebnis in doppelter Genauigkeit (64 bit) zurück.
