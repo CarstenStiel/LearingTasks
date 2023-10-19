@@ -7,11 +7,11 @@
 - **[.gitignore](.gitignore):** Dateien, die nicht mit ins Git gepusht werden sollen (<ins>keine</ins> Relevanz für die
   Aufgaben)
 - **[arangeTask.py](arangeTask.py):** <ins>arange</ins> Aufgabe mit Funktion
+- **[extensions.py](extensions.py):** Funktionen, zum Ausprobieren bzw. die Aufgaben erweitern (<ins>keine</ins> direkte
+  Relevanz für die Aufgaben)
 - **[main.py](main.py):** Main Datei, von der aus die verschiedenen Aufgaben bzw. Programme und Funktionen ausgeführt
   werden
-- **[snTask.py](snTask.py):** <ins>SN</ins> Aufgabe mit Funktionen für Berechnung und Genauigkeit
-- **[tryOut.py](tryOut.py):** Funktionen, zum Ausprobieren bzw. die Aufgaben erweitern (<ins>keine</ins> direkte
-  Relevanz für die Aufgaben)
+- **[snTask.py](C01.py):** <ins>SN</ins> Aufgabe mit Funktionen für Berechnung und Genauigkeit
 
 ## Vor dem ersten Start
 
