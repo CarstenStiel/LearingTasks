@@ -1,8 +1,11 @@
-# Imports aus anderen Dateien und packages(numpy)
-import numpy as np  # Import von Numpy
-from arangeTask import calculate_steps  # Funktion für die arange Aufgabe
-import snTask as sn  # Import aller Funktionen für die SN Aufgabe
-from tryOut import inputN
+# Imports aus anderen Dateien und packages
+import sys  # Import von Systemspezifischen Parametern und Funktionen
+import os  # Import von Bertriebssystem spezifischen Parametern und Funktionen
+
+sys.path.append("C01/")  # Füge das Verzeichnis C01 zum Modul-Suchpfad hinzu
+import aufgabe2 as a2  # Import von Aufgabe 2
+import erweiterung as ext  # Import von nicht relevanten Erweiterungen für Aufgabe 2
+import sampleSolution as sample  # Import der Musterlösung
 
 # Dies ist die "main Klasse" von der aus das Program gestartet wird
 if __name__ == '__main__':
@@ -20,28 +23,24 @@ if __name__ == '__main__':
     print(arr2)
     print(len(arr2))
     """
-    # Aufgabe SN
-    # SN1
-    res1Rec = sn.sn1Recursive(6)  # SN1 rekursiv berechnet
-    res1For = sn.sn1For(6)  # SN1 mittels For-Schleife berechnet
-    print("SN1-Genauigkeiten mit Rekursion:")  # Ausgabe
-    print(f"In einfacher Genauigkeit: {sn.singlePrecision(res1Rec)}")  # SN1 (rekursiv) in einfacher Genauigkeit berechnet (siehe snTask) und ausgegeben
-    print(f"In doppelter Genauigkeit: {sn.doublePrecision(res1Rec)}")  # SN1 (rekursiv) in doppelter Genauigkeit berechnet (siehe snTask) und ausgegeben
-    print("SN1-Genauigkeiten mit For-Schleife:")
-    print(f"In einfacher Genauigkeit: {sn.singlePrecision(res1For)}")  # SN1 (For-Schleife) in einfacher Genauigkeit berechnet (siehe snTask) und ausgegeben
-    print(f"In doppelter Genauigkeit: {sn.doublePrecision(res1For)}")  # SN1 (For-Schleife) in doppelter Genauigkeit berechnet (siehe snTask) und ausgegeben
     """
-    # SN2
-    res2Rec = sn.sn2Recursive(2)  # SN2 rekursiv berechnet
-    res2For = sn.sn2For(2)  # SN2 mittels For-Schleife berechnet
-    print("SN2-Genauigkeiten:")
-    sn.precision(res2Rec)  # SN2 (rekursiv) in einfacher und doppelter Genauigkeit ausgeben (siehe snTask)
-    sn.precision(res2For)  # SN2 (For-Schleife) in einfacher und doppelter Genauigkeit ausgeben (siehe snTask)
+    # Aufgabe 2, Musterlösung
+    os.chdir("C01/")  # Wechseln des Ordners zu C01, damit im ouputverzeichnis die Dateien erstellt werden können
+    sample.test()
+    os.path.dirname("C:\\Users\\timot\\Desktop\\LearingTasks")  # Wechsel zurück zum ursprünglichem Verzeichnis
     """
-    """
-    # SN1 Input
-    res1Rec = sn.sn1Recursive(inputN())  # SN1 rekursiv berechnet
-    print("SN1-Genauigkeiten mit Rekursion:")  # Ausgabe
-    print(f"In einfacher Genauigkeit: {sn.singlePrecision(res1Rec)}")  # SN1 (rekursiv) in einfacher Genauigkeit berechnet (siehe snTask) und ausgegeben
-    print(f"In doppelter Genauigkeit: {sn.doublePrecision(res1Rec)}")  # SN1 (rekursiv) in doppelter Genauigkeit berechnet (siehe snTask) und ausgegeben
-    """
+    # Aufgabe 2, eigene Lösung.
+    # Hier werden Arrays mit den Lösungen der S-Funktionen bis N erstellt und ausgegeben → Zum Beispiel für S1N: [0, S11, S12, S13] für N = 3 (siehe C01/aufgabe2.py).
+    # Dies richtet sich nach der Musterlösung!
+    # Um ein spezifisches S auszurechnen, siehe C01/erweiterung.py
+    N = ext.input_n()  # Eingabe von N mit Userinput (C01/erweiterung.py). Die Input-Funktion kann man auch durch ein selbst gewähltes N ersetzen (z.B. nächste Zeile)
+    # N = 5
+    print(f"Arrays der einfachen und doppelten Genauigkeit für S1 und S2 mit N = {N}")
+    print("Einfache Genauigkeit")
+    print(f"S1: {a2.s1_sp(N)}")
+    print(f"S2: {a2.s2_sp(N)}")
+    print("Doppelte Genauigkeit")
+    print(f"S1: {a2.s1_dp(N)}")
+    print(f"S2: {a2.s2_dp(N)}")
+    # Zusatz, erstellen von den Dateien
+    ext.output_files(sp_filename="sp_output", dp_filename="dp_output", path="C01/output", N=N)
