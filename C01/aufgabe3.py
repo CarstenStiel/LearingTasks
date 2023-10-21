@@ -3,39 +3,53 @@ import matplotlib.pyplot as plt
 
 
 # Derzeit in Bearbeitung und dient nur als Test!
-# Nicht verwenden
-def plotting(s1, s2, N):
-    """
-    print(s2)
-    fig = plt.figure()  # Erstellt eine Abbildung
-    ax = fig.add_subplot(1, 1, 1)  # Erstellt die Achsen zur Abbildung
-    ax.set_xlabel('N')  # X-Achse als "N"
-    ax.set_ylabel('s1 and s2')  # Y-Achse als "s1 and s2"
-    ax.grid()  # Fügt ein Raster ein
-    x_plot = np.arange(0, N + 1, 1)
-    ax.plot(x_plot, s1, x_plot, s2)
-    ax.legend(['s1', 's2'])
-    plt.show()
-    """
-    N = np.arange(0, N + 1, 1)
-    S_log_array = np.array([])
-    N_log_array = np.array([])
-    for i in range(1, len(N)):
-        N_log = np.log10(N[i])
-        N_log_array = np.append(N_log_array, N_log)
-        term = abs((s1[i] - s2[i]) / s2[i])
-        if term != 0:
-            S_log = np.log10(term)
-            print(S_log)
-            # print(f"{i}: {S_log}")
-            S_log_array = np.append(S_log_array, S_log)
-        else:
-            # print(f"{i}: {np.nan}")
-            S_log_array = np.append(S_log_array, np.nan)
+def plotting(filename_sp, filename_dp, path):
+    filepath_sp = path + "/" + filename_sp
+    filepath_dp = path + "/" + filename_dp
+    N = []
+    cal_sp, cal_dp = [], []
 
-    plt.figure()  # Erstellt eine Abbildung
-    plt.loglog(N_log_array, S_log_array, label='log10(|(a - b) / b|)', color='blue')
-    plt.xlabel('N')
-    plt.legend()
+    try:
+        with open(filepath_sp, 'r') as file:
+            lines = file.readlines()
+            # Wir beginnen bei Zeile 2 und iterieren über die restlichen Zeilen
+            for line in lines[1:]:
+                values = [np.float32(s) for s in line.split()]
+                diff = values[-1]
+                s2 = values[-2]
+                term = np.float32(abs(diff / s2))
+                N = np.append(N, values[0])
+                cal_sp = np.append(cal_sp, term)
+
+    except FileNotFoundError:
+        print(f'Die Datei {filename_dp} wurde nicht gefunden unter folgendem Verzeichnis: {filepath_dp}.')
+    except Exception as e:
+        print(f'Ein Fehler ist aufgetreten: {str(e)}')
+
+    try:
+        N = []
+        with open(filepath_dp, 'r') as file:
+            lines = file.readlines()
+            # Wir beginnen bei Zeile 2 und iterieren über die restlichen Zeilen
+            for line in lines[1:]:
+                values = [float(s) for s in line.split()]
+                diff = values[-1]
+                s2 = values[-2]
+                term = abs(diff / s2)
+                N = np.append(N, values[0])
+                cal_dp = np.append(cal_dp, term)
+
+    except FileNotFoundError:
+        print(f'Die Datei {filename_dp} wurde nicht gefunden unter folgendem Verzeichnis: {filepath_dp}.')
+    except Exception as e:
+        print(f'Ein Fehler ist aufgetreten: {str(e)}')
+
+    plt.figure(figsize=(10, 6))  # Ändert die Größe der Abbildung auf 10 Zoll Breite und 6 Zoll Höhe
+    # Erstellt eine Abbildung
+    # plt.loglog(N, cal_sp, label="single-Precision", marker='o')
+    plt.loglog(N, cal_dp, label="double-Precision", marker='o')
+    plt.ylabel("log10|(s1 - s2) / s2|")
+    plt.xlabel("log10(N)")
     plt.grid()
+    plt.legend()
     plt.show()
