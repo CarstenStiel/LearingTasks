@@ -4,6 +4,7 @@ import os  # Import von Bertriebssystem spezifischen Parametern und Funktionen
 
 sys.path.append("C01/")  # Füge das Verzeichnis C01 zum Modul-Suchpfad hinzu
 import aufgabe2 as a2  # Import von Aufgabe 2
+import aufgabe3 as a3  # Import von Aufgabe 3
 import erweiterung as ext  # Import von nicht relevanten Erweiterungen für Aufgabe 2
 import sampleSolution as sample  # Import der Musterlösung
 
@@ -35,6 +36,7 @@ if __name__ == '__main__':
     # Um ein spezifisches S auszurechnen, siehe C01/erweiterung.py
     N = ext.input_n()  # Eingabe von N mit Userinput (C01/erweiterung.py). Die Input-Funktion kann man auch durch ein selbst gewähltes N ersetzen (z.B. nächste Zeile)
     # N = 5
+    """
     print(f"Arrays der einfachen und doppelten Genauigkeit für S1 und S2 mit N = {N}")
     print("Einfache Genauigkeit")
     print(f"S1: {a2.s1_sp(N)}")
@@ -42,5 +44,7 @@ if __name__ == '__main__':
     print("Doppelte Genauigkeit")
     print(f"S1: {a2.s1_dp(N)}")
     print(f"S2: {a2.s2_dp(N)}")
+    """
     # Zusatz, erstellen von den Dateien
     ext.output_files(sp_filename="sp_output", dp_filename="dp_output", path="C01/output", N=N)
+    a3.plotting(filename_sp="sp_output.txt", filename_dp="dp_output.txt", path="C01/output")
