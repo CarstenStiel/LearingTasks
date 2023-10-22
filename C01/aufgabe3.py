@@ -50,6 +50,8 @@ def plotting(filename_sp, filename_dp, path):
     plt.loglog(N, cal_dp, label="double-Precision", marker='o')
     plt.ylabel("log10|(s1 - s2) / s2|")
     plt.xlabel("log10(N)")
+    plt.title("Aufgabe 3")
     plt.grid()
     plt.legend()
     plt.show()
+    print("Plotting beendet!")

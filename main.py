@@ -47,4 +47,4 @@ if __name__ == '__main__':
     """
     # Zusatz, erstellen von den Dateien
     ext.output_files(sp_filename="sp_output", dp_filename="dp_output", path="C01/output", N=N)
-    print(a3.plotting(filename_sp="sp_output.txt", filename_dp="dp_output.txt", path="C01/output"))
+    a3.plotting(filename_sp="sp_output.txt", filename_dp="dp_output.txt", path="C01/output")
