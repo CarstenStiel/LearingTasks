@@ -16,7 +16,7 @@ def plotting(filename_sp, filename_dp, path):  # Übergabe von Dateinamen für e
             lines = file.readlines()  # Alle Zeilen speichern
             # Wir beginnen bei Zeile 2 und iterieren über die restlichen Zeilen
             for line in lines[1:]:
-                values = [np.float32(s) for s in line.split()]  # Speichere alle Werte als einfache Genauigkeit einer Zeile in einem Array [N, s1, s2, diff]
+                values = [np.float32(s) for s in line.split()]  # Speichere alle Werte einer Zeile in einem Array [N, s1, s2, diff]
                 diff = values[-1]  # Speichere die Differenz
                 s2 = values[-2]  # Speichere s2
                 term = np.float32(abs(diff / s2))  # Führe berechnung aus (|(s1-s2)/s2|)
