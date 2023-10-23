@@ -41,7 +41,7 @@ def test():
     s2_array = np.array([s_2])
     diff_array = np.array([0])  # Unterschied zwischen s1 und s2
 
-    with open("output/outputSample.txt", "w") as outputfile:  # Schreibe eine extra Datei für die Ausgabewerte
+    with open("outputSample.txt", "w") as outputfile:  # Schreibe eine extra Datei für die Ausgabewerte
         # for i in range(1, N, 1):
         for i in range(1, N + 1, 1):
             j = 2 * (i - 1) + 1
@@ -59,7 +59,6 @@ def test():
             s2_array = np.append(s2_array, [s_2])
 
             diff = abs(s_1 - s_2)
-            print(diff)
             diff_array = np.append(diff_array, [diff])
 
             #        print(f'i = {i} s_1 = {s_1:.16f} s_2 = {s_2:.16f} diff = {diff:.16f}')
@@ -78,7 +77,7 @@ def test():
     s2_sp_array = np.array([s_2_sp])
     diff_sp_array = np.array([np.float32(0)])
 
-    with open("output/output32sample.txt", "w") as outputfile:
+    with open("output32sample.txt", "w") as outputfile:
         # for i in range(1, N, 1):
         for i in range(1, N + 1, 1):
             j = 2 * (i - 1) + 1
@@ -177,13 +176,13 @@ def test():
 
     # another variant to plot graphs for diff and diff_sp, log scale
     X, Y = [], []
-    for line in open('output/outputSample.txt', 'r'):
+    for line in open('outputSample.txt', 'r'):
         values = [float(s) for s in line.split()]
         X.append(values[0])
         Y.append(values[3])
 
     X_sp, Y_sp = [], []
-    for line in open('output/output32sample.txt', 'r'):
+    for line in open('output32sample.txt', 'r'):
         values = [np.float32(s) for s in line.split()]
         X_sp.append(values[0])
         Y_sp.append(values[3])

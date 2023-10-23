@@ -32,3 +32,6 @@ Eingabeaufforderung) als <ins>Administrator</ins> ausgeführt werden sollte!
     - Alternative: Visual Studio Code (kostenfrei mit allen Plugins) unter folgender
       Website: https://code.visualstudio.com/
     - Hilfreiche Plugins: Prettier (Folge den Einrichtungshinweisen → node.js vorausgesetzt), Git, Github
+
+3. ***Bibliotheken:***
+    - matplotlib: `pip install matplotlib`
