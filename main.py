@@ -46,5 +46,7 @@ if __name__ == '__main__':
     print(f"S2: {a2.s2_dp(N)}")
     """
     # Zusatz, erstellen von den Dateien
-    ext.output_files(sp_filename="sp_output", dp_filename="dp_output", path="C01/output", N=N)
+    ext.output_file(filename="sp_output", path="C01/output", N=N, s_len=8, s1=a2.s1_sp(N), s2=a2.s2_sp(N))  # Erstellen der Datei für einfache Genauigkeit
+    ext.output_file(filename="dp_output", path="C01/output", N=N, s_len=16, s1=a2.s1_dp(N), s2=a2.s2_dp(N))  # Erstellen der Datei für doppelte Genauigkeit
+    # Plotten der Daten
     a3.plotting(filename_sp="sp_output.txt", filename_dp="dp_output.txt", path="C01/output")

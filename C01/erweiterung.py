@@ -54,31 +54,19 @@ def input_n():
 
 
 # Diese Funktion berechnet für einen N wert, alle S-Funktionen und erstellt für diese zwei Dateien in der diese gespeichert werden
-def output_files(sp_filename, dp_filename, path, N):  # Übergabe der Namen und des Pfades und die Namen für die Dateien der einfachen und doppelten Genauigkeit
-    sp_filepath = path + "/" + sp_filename  # Erstellung des Pfades für die Datei der einfachen Genauigkeit
-    dp_filepath = path + "/" + dp_filename  # Erstellung des Pfades für die Datei der doppelten Genauigkeit
+def output_file(filename, path, N, s_len, s1, s2):  # Übergabe der Namen und des Pfades und die Namen für die Dateien, sowie N, die länge, die S in der Datei haben soll(s_len) und s1 und s2
+    filepath = path + "/" + filename  # Erstellung des Pfades für die Datei
     N_len = len(str(N))  # Länge der eingegebenen Zahl, damit die N-Spalte der Datei das richtige Format hat
-    s1_sp_arr = a2.s1_sp(N)  # Array für die S1 Funktion der einfachen Genauigkeit
-    s2_sp_arr = a2.s2_sp(N)  # Array für die S2 Funktion der einfachen Genauigkeit
-    diff_sp_array = np.array([np.float32(0)])  # Array für die Differenz von S1 und S2 mit einfacher Genauigkeit
-    s1_dp_arr = a2.s1_dp(N)  # Array für die S1 Funktion der doppelten Genauigkeit
-    s2_dp_arr = a2.s2_dp(N)  # Array für die S1 Funktion der doppelten Genauigkeit
-    diff_dp_array = np.array([0.0])  # Array für die Differenz von S1 und S2 mit doppelter Genauigkeit
-    # Erstellen/bearbeiten der Datei für die einfache Genauigkeit
-    with open(f"{sp_filepath}.txt", "w") as outputfile:  # Öffnen/erstellen einer Textdatei(.txt) im angegebenen Pfad
-        outputfile.write('{:{N_len}s} {:10s} {:10s} {:10s} \n'.format("N", "s1", "s2", "diff", N_len=N_len))  # In die erste Zeile werden die "Überschriften" geschrieben
+    s1_arr = s1  # Array für S1
+    s2_arr = s2  # Array für S2
+    diff_array = np.array([np.float32(0)])  # Array für die Differenz von S1 und S2
+    # Erstellen/bearbeiten der Datei
+    with open(f"{filepath}.txt", "w") as outputfile:  # Öffnen/erstellen einer Textdatei(.txt) im angegebenen Pfad
+        outputfile.write(
+            '{:{N_len}s} {:{s_len}s} {:{s_len}s} {:{s_len}s} \n'.format("N", "s1", "s2", "diff", N_len=N_len, s_len=s_len + 2))  # In die erste Zeile werden die "Überschriften" geschrieben
         # Für jeden Eintrag von N
         for n in range(1, N + 1):
-            diff_sp = abs(s1_sp_arr[n] - s2_sp_arr[n])  # Berechne den Betrag (|s1-s2|) von s1 und s2
-            diff_sp_array = np.append(diff_sp_array, diff_sp)  # Füge die Berechnung der Differenz dem Differenzarray hinzu
-            outputfile.write(f'{str(n):{N_len}s} {s1_sp_arr[n]:.8f} {s2_sp_arr[n]:.8f} {diff_sp:.8f} \n')  # Schreibe die Werte in die Datei
-    print(f'Datei "{sp_filename}" für single-precision mit N = {N}, wurde unter {sp_filepath} erstellt/bearbeitet!')  # Ausgabe in der Konsole, wenn die For-Schleife erfolgreich beendet wurde
-    # Erstellen/bearbeiten der Datei für die doppelte Genauigkeit
-    with open(f"{dp_filepath}.txt", "w") as outputfile:  # Öffnen/erstellen einer Textdatei(.txt) im angegebenen Pfad
-        outputfile.write('{:{N_len}s} {:18s} {:18s} {:18s} \n'.format("N", "s1", "s2", "diff", N_len=N_len))  # In die erste Zeile werden die "Überschriften" geschrieben
-        # Für jeden Eintrag von N
-        for n in range(1, N + 1):
-            diff_dp = abs(s1_dp_arr[n] - s2_dp_arr[n])  # Berechne den Betrag (|s1-s2|) von s1 und s2
-            diff_dp_array = np.append(diff_dp_array, diff_dp)  # Füge die Berechnung der Differenz dem Differenzarray hinzu
-            outputfile.write(f'{str(n):{N_len}s} {s1_dp_arr[n]:.16f} {s2_dp_arr[n]:.16f} {diff_dp:.16f} \n')  # Schreibe die Werte in die Datei
-    print(f'Datei "{dp_filename}" für double-precision mit N = {N}, wurde unter {dp_filepath} erstellt/bearbeitet!')  # Ausgabe in der Konsole, wenn die For-Schleife erfolgreich beendet wurde
+            diff = abs(s1_arr[n] - s2_arr[n])  # Berechne den Betrag (|s1-s2|) von s1 und s2
+            diff_array = np.append(diff_array, diff)  # Füge die Berechnung der Differenz dem Differenzarray hinzu
+            outputfile.write(f'{str(n):{N_len}s} {s1_arr[n]:.{s_len}f} {s2_arr[n]:.{s_len}f} {diff:.{s_len}f} \n')  # Schreibe die Werte in die Datei
+    print(f'Datei "{filename}" für mit N = {N}, wurde unter {filepath} erstellt/bearbeitet!')  # Ausgabe in der Konsole, wenn die For-Schleife erfolgreich beendet wurde
