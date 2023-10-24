@@ -65,18 +65,20 @@ def ratios(s1_array, s2_array):
     else:
         raise ValueError("Länge der Arrays nicht gleich!")
 
-N = 100
 
-N_values = np.arange(1, N + 1, 1)  # Liste von N werten erzeugen
+if __name__ == "__main__":
+    N = 100
 
-# log-log-Plot erstellen
-plt.loglog(N_values, ratios(s1_dp(N), s2_dp(N)), label='doppelte Genauigkeit')
-# Legende und Achsentitel
-plt.legend()
-plt.xlabel('log10(N)')
-plt.ylabel('log10(|SN1 - SN2)/SN2|)')
-plt.title('Aufgabe3')
+    N_values = np.arange(1, N + 1, 1)  # Liste von N werten erzeugen
 
-# Plot anzeigen
-plt.grid()
-plt.show()
+    # log-log-Plot erstellen
+    plt.loglog(N_values, ratios(s1_dp(N), s2_dp(N)), label='doppelte Genauigkeit')
+    # Legende und Achsentitel
+    plt.legend()
+    plt.xlabel('log10(N)')
+    plt.ylabel('log10(|SN1 - SN2)/SN2|)')
+    plt.title('Aufgabe3')
+
+    # Plot anzeigen
+    plt.grid()
+    plt.show()
