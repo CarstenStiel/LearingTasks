@@ -1,143 +1,82 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-#Aufgabe 2 aus C01 in 2 verschiedenen Varianten
+
+
+# Aufgabe 1
+
+
+# Aufgabe 2 aus C01 in 2 verschiedenen Varianten.
 # Diese Funktion berechnet SN1 rekursiv und gibt dies zurück
-def sn1Recursive(N, n=1):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
-    # Wenn N eine ganze Zahl mindestens der Größe eins ist, dann führe die Berechnung aus
-    if isinstance(N, int) and N >= 1:
-        # Wenn n größer als 2N geworden ist, dann gib 0 zurück
-        if n > (2 * N):
-            return 0
-        # Wenn n kleiner als 2N ist, dann führe die Berechnung aus
-        else:
-            cal = pow((-1), n) * (n / (n + 1))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1))
-            return cal + sn1Recursive(N, n + 1)  # Gibt die Berechnung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
-    # Wenn N keine ganze Zahl oder kleiner 1 ist, dann wird eine Exception geworfen
+def s1_sp(N):  # N wird als Parameter eingeben
+    s1 = np.array([np.float32(0.0)])  # Initialisiere das Ergebnisarray mit dem Wert 0 (0 als einfache Genauigkeit)
+    for i in range(1, N + 1):  # Für jedes n(i) von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
+        # Da wir nur bis N rechnen, 2N aber benötigt wird, wird hier mit n und n + 1 gerechnet
+        n = np.float32(2 * (i - 1) + 1)  # Da wir für 2N rechnen (doppelte berechnung ausführen) folgt → i = 1, dann rechnen wir n = 1 und 2 aus; i = 2, dann rechnen wir n = 3 und 4 aus, etc.
+        cal1 = np.float32(np.float32(pow(-1, n)) * n / (n + 1.0))  # Berechnung von S1 für n
+        cal2 = cal1 + np.float32(np.float32(pow(-1, n + 1)) * (n + 1.0) / (n + 2.0))  # Berechnung von S1 für n + 1, welches dann auf die vorherige Rechnung addiert wird
+        res = s1[-1] + cal2  # Addiere S1 mit n und n + 1 für das nächste kleinere S1 zusammen
+        s1 = np.append(s1, res)  # Anhängen des Ergebnisses an das Lösungsarray
+    return s1  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnisarray zurück
+
+
+# S2 mit einfacher Genauigkeit (single precision) berechnen → die einzelnen Variabelen muss mit float32 in einfache Genauigkeit umgerechnet werden!
+def s2_sp(N):  # N wird als Parameter eingeben
+    s2 = np.array([np.float32(0.0)])  # Initialisiere das Ergebnisarray mit dem Wert 0 (0 als einfache Genauigkeit)
+    for i in range(1, N + 1):  # Für jedes n(i) von 1 bis 2N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
+        n = np.float32(i)  # n in einfache Genauigkeit umrechnen
+        res = s2[-1] + np.float32(1.0 / (2.0 * n * ((2.0 * n) + 1.0)))  # Berechnung auf das Ergebnis nächst kleinere S2 addieren
+        s2 = np.append(s2, res)  # Anhängen des Ergebnisses an das Lösungsarray
+    return s2  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnisarray zurück
+
+
+# Wichtig: Die doppelte Genauigkeit ist bei Python von sich aus gegeben und muss NICHT mit float64 erreicht werden
+# S1 mit doppelter Genauigkeit (double precision) berechnen
+def s1_dp(N):  # N wird als Parameter eingeben
+    s1 = np.array([0.0])  # Initialisiere das Ergebnisarray(result) mit dem Wert 0
+    for i in range(1, N + 1):  # Für jedes n(i) von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
+        # Da wir nur bis N rechnen, 2N aber benötigt wird, wird hier mit n und n + 1 gerechnet
+        n = float(2 * (i - 1) + 1)  # Da wir für 2N rechnen (doppelte berechnung ausführen) folgt → i = 1, dann rechnen wir n = 1 und 2 aus; i = 2, dann rechnen wir n = 3 und 4 aus, etc.
+        cal1 = float(pow(-1.0, n)) * n / (n + 1.0)  # Berechnung von S1 für n
+        cal2 = cal1 + float(pow(-1.0, n + 1)) * (n + 1.0) / (n + 2.0)  # Berechnung von S1 für n + 1 und addiere diese zusammen
+        res = s1[-1] + cal2  # Addiere S1 mit n und n + 1 für das nächste kleinere S1 zusammen
+        s1 = np.append(s1, [res])  # Anfügen des S1 an das Ergebnisarray
+    return s1  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnisarray zurück
+
+
+# S2 mit doppelter Genauigkeit (double precision) berechnen → die einzelnen Variabelen muss mit float32 in einfache Genauigkeit umgerechnet werden!
+def s2_dp(N):  # N als Parameter eingeben
+    s2 = np.array([0.0])  # Initialisiere das Ergebnisarray mit dem Wert 0 (0 als einfache Genauigkeit)
+    for i in range(1, N + 1):  # Für jedes n(i) von 1 bis 2N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
+        n = float(i)  # Umrechnen von n in float für doppelte Genauigkeit
+        res = s2[-1] + 1.0 / (2.0 * n * (2.0 * n + 1.0))  # Berechnung auf das Ergebnis nächst kleinere S2 addiere
+        s2 = np.append(s2, res)  # Anfügen des S2 an das Ergebnisarray
+    return s2  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnisarray zurück
+
+
+# Werte berechnen für log10(|(SN1-SN2)/SN2|)
+def ratios(s1_array, s2_array):
+    func = np.array([])
+    if len(s2_array) == len(s1_array):
+        for i in range(1, len(s1_array)):
+            term = np.abs(((s1_array[i] - s2_array[i]) / s2_array[i]))
+            func = np.append(func, term)
+        return func
     else:
-        raise ValueError("N muss eine ganze Zahl mindestens der Größe 1 sein!")
+        raise ValueError("Länge der Arrays nicht gleich!")
 
+N = 100
 
-# Diese Funktion berechnet SN1 mit einer For-Schleife und gibt dies zurück
-def sn1For(N):  # Nur N als Parameter eingeben
-    # Wenn N eine ganze Zahl mindestens der Größe eins ist, dann führe die Berechnung aus
-    if isinstance(N, int) and N >= 1:
-        res = 0  # Initialisiere das Ergebnis(result) mit dem Wert 0
-        for n in range(1, (2 * N) + 1):  # Für jedes n von 1 bis 2N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
-            res += pow((-1), n) * (n / (n + 1))  # Addiere die Berechnung auf das Ergebnis
-        return res  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnis zurück
-    # Wenn N keine ganze Zahl oder kleiner 1 ist, dann wird eine Exception geworfen
-    else:
-        raise ValueError("N muss eine ganze Zahl mindestens der Größe 1 sein!")
+N_values = np.arange(1, N + 1, 1)  # Liste von N werten erzeugen
 
-
-# Diese Funktion berechnet SN2 rekursiv und gibt dies zurück
-def sn2Recursive(N, n=1):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
-    # Wenn N eine ganze Zahl mindestens der Größe eins ist, dann führe die Berechnung aus
-    if isinstance(N, int) and N >= 1:
-        # Wenn n größer als N geworden ist, dann gib 0 zurück
-        if n > N:
-            return 0
-        # Wenn n kleiner als N ist, dann führe die Berechnung aus
-        else:
-            cal = 1 / (2 * n * ((2 * n) + 1))  # Berechnung(calculation)
-            return cal + sn2Recursive(N,
-                                      n + 1)  # Gibt die Berechung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
-    # Wenn N keine ganze Zahl oder kleiner 1 ist, dann wird eine Exception geworfen
-    else:
-        raise ValueError("N muss eine ganze Zahl mindestens der Größe 1 sein!")
-
-
-# Diese Funktion berechnet SN2 mit einer For-Schleife und gibt dies zurück
-def sn2For(N):  # Nur N als Parameter eingeben
-    # Wenn N eine ganze Zahl mindestens der Größe eins ist, dann führe die Berechnung aus
-    if isinstance(N, int) and N >= 1:
-        res = 0  # Initialisiere das Ergebnis(result) mit dem Wert 0
-        for n in range(1, N + 1):  # Für jedes n von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
-            res += (1 / (2 * n * ((2 * n) + 1)))  # Berechnung(calculation)
-        return res  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnis zurück
-    # Wenn N keine ganze Zahl oder kleiner 1 ist, dann wird eine Exception geworfen
-    else:
-        raise ValueError("N muss eine ganze Zahl mindestens der Größe 1 sein!")
-
-
-# Diese Funktion gibt eine Eingabe in einfacher und doppelter Genauigkeit aus
-# Hier kann man ggf auch noch prüfen, ob ein Zahlenwert eingegeben wurde!
-def precision(res):
-    print(f"Ergebnis: {res}")
-    print(f"In einfacher Genauigkeit: {np.float32(res)}")
-    print(f"In doppelter Genauigkeit: {np.float64(res)}")
-
-
-# Diese Funktion gibt ein Ergebnis in einfacher Genauigkeit (32bit) zurück.
-# Hier kann man ggf auch noch prüfen, ob ein Zahlenwert eingegeben wurde!
-def singlePrecision(res):
-    return np.float32(res)
-
-
-# Diese Funktion gibt ein Ergebnis in doppelter Genauigkeit (64 bit) zurück.
-# Hier kann man ggf auch noch prüfen, ob ein Zahlenwert eingegeben wurde!
-# Diese Funktion dient nur der Vollständigkeit, da der Python Datentyp "float" doppelte Genauigkeit verwendet.
-def doublePrecision(res):
-    return np.float64(res)
-
-    # Aufgabe SN
-    # SN1
-
-
-res1Rec = sn1Recursive(6)
-res1For = sn1For(6)
-print("SN1-Genauigkeiten mit Rekursion:")  # Ausgabe
-print(f"In einfacher Genauigkeit: {singlePrecision(res1Rec)}")  # SN1 (rekursiv) in einfacher Genauigkeit berechnet (siehe snTask) und ausgegeben
-print(f"In doppelter Genauigkeit: {doublePrecision(res1Rec)}")  # SN1 (rekursiv) in doppelter Genauigkeit berechnet (siehe snTask) und ausgegeben
-print("SN1-Genauigkeiten mit For-Schleife:")
-print(f"In einfacher Genauigkeit: {singlePrecision(res1For)}")  # SN1 (For-Schleife) in einfacher Genauigkeit berechnet (siehe snTask) und ausgegeben
-print(f"In doppelter Genauigkeit: {doublePrecision(res1For)}")  # SN1 (For-Schleife) in doppelter Genauigkeit berechnet (siehe snTask) und ausgegeben
-
-# SN2
-res2Rec = sn2Recursive(2)  # SN2 rekursiv berechnet
-res2For = sn2For(2)  # SN2 mittels For-Schleife berechnet
-print("SN2-Genauigkeiten:")
-precision(res2Rec)  # SN2 (rekursiv) in einfacher und doppelter Genauigkeit ausgeben (siehe snTask)
-precision(res2For)  # SN2 (For-Schleife) in einfacher und doppelter Genauigkeit ausgeben (siehe snTask)
-# SN1 Input
-res1Rec = sn1Recursive(6)  # SN1 rekursiv berechnet
-print("SN1-Genauigkeiten mit Rekursion:")  # Ausgabe
-print(f"In einfacher Genauigkeit: {singlePrecision(res1Rec)}")  # SN1 (rekursiv) in einfacher Genauigkeit berechnet (siehe snTask) und ausgegeben
-print(f"In doppelter Genauigkeit: {doublePrecision(res1Rec)}")  # SN1 (rekursiv) in doppelter Genauigkeit berechnet (siehe snTask) und ausgegeben
-
-#Aufgabe 3 aus C01: Graph Plot
-#df = pd.DataFrame({'x' : ([abs((((-1), n) * (n / (n + 1))-(1 / (2 * n * ((2 * n) + 1))))/(1 / (2 * n * ((2 * n) + 1))))],
-                   #'y' : [N])})
-
-# Funktionen definieren
-def SN1(N):
-    if isinstance(N, int) and N >= 1:
-        # Wenn n größer als N geworden ist, dann gib 0 zurück
-        if n > N:
-            return 0
-        # Wenn n kleiner als N ist, dann führe die Berechnung aus
-        else:
-            cal = 1 / (2 * n * ((2 * n) + 1))  # Berechnung(calculation)
-            return cal + sn2Recursive(N,n + 1)
-def SN2 (N):
-    if isinstance(N, int) and N >= 1:
-        res = 0  # Initialisiere das Ergebnis(result) mit dem Wert 0
-        for n in range(1, N + 1):  # Für jedes n von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
-            res += (1 / (2 * n * ((2 * n) + 1)))  # Berechnung(calculation)
-        return res
-
-N_values = np.arange(1, 1000001, 1) #Liste von N werten erzeugen
-
-#Werte berechnen für log10(|(SN1-SN2)/SN2|)
-def log_ratios(): np.log10(np.abs((SN1(N_values) - SN2(N_values))/SN2(N_values)))
-#log-log-Plot erstellen
-plt.loglog(N_values, log_ratios, label='log10(|SN1 - SN2)/SN2|)')
-#Legende und Achsentitel
+# log-log-Plot erstellen
+plt.loglog(N_values, ratios(s1_dp(N), s2_dp(N)), label='doppelte Genauigkeit')
+# Legende und Achsentitel
 plt.legend()
 plt.xlabel('log10(N)')
 plt.ylabel('log10(|SN1 - SN2)/SN2|)')
+plt.title('Aufgabe3')
 
-#Plot anzeigen
+# Plot anzeigen
 plt.grid()
 plt.show()
