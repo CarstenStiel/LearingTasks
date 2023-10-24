@@ -1,4 +1,4 @@
- #Schrittweite ohne Numpy
+# Schrittweite ohne Numpy
 import numpy as np
 
 
@@ -17,16 +17,17 @@ def calculate_steps(start, stop, step):
             current += step  # Erhöhe den derzeitigen Wert und die Schrittweite
 
     return arr  # Sobald die der derzeitige Wert gleich oder größer dem Stop ist, wird das Array hier zurückgegeben
+
+
 if __name__ == '__main__':
- arr2 = calculate_steps(10, 2, -0.5)
- print("Ohne arange-Funktion:")
- print(arr2)
- print(len(arr2))
+    print(__name__)
+    arr2 = calculate_steps(10, 2, -0.5)
+    print("Ohne arange-Funktion:")
+    print(arr2)
+    print(len(arr2))
 
-
-#Schrittweite mit Numpy
-arr1 = np.arange (start = 2, stop = 1000, step = 0.7)
+# Schrittweite mit Numpy
+arr1 = np.arange(start=2, stop=1000, step=0.7)
 print("Mit arange-Funktion")
 print(arr1)
 print(len(arr1))
-
