@@ -5,7 +5,7 @@
 ## Projektstruktur
 
 - **[C01](C01):** Hier befinden sich die Dateien für die Aufgabe C01
-- **[other](other):** Hier befinden sich die Dateien für die Aufgaben, die nicht direkt einer Aufgabe zugehören
+- **[other](C00):** Hier befinden sich die Dateien für die Aufgaben, die nicht direkt einer Aufgabe zugehören
 - **[.gitignore](.gitignore):** Dateien, die nicht mit ins Git gepusht werden sollen (<ins>keine</ins> Relevanz für die
   Aufgaben)
 - **[main.py](main.py):** Main Datei, von der aus die verschiedenen Aufgaben bzw. Programme und Funktionen ausgeführt
@@ -35,3 +35,4 @@ Eingabeaufforderung) als <ins>Administrator</ins> ausgeführt werden sollte!
 
 3. ***Bibliotheken:***
     - matplotlib: `pip install matplotlib`
+    - numpy: `pip install numpy`
