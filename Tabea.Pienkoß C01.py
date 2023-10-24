@@ -3,10 +3,57 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# Aufgabe 1
+# Aufgabe 2)
+# Hier wird anstelle eines Array eine spezifische S-Funktion berechnet mithilfe von Rekursion (doppelte Genauigkeit).
+# Diese Funktion berechnet SN1 rekursiv und gibt dies zurück
+def s1_dp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
+    # Wenn n größer als 2N geworden ist, dann gib 0 zurück
+    if n > (2 * N):
+        return 0.0
+    # Wenn n kleiner als 2N ist, dann führe die Berechnung aus
+    else:
+        n = float(n)  # n in float für doppelte Genauigkeit umrechnen
+        cal = pow((-1.0), n) * (n / (n + 1.0))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1))
+        return cal + s1_dp_recursive(N, n + 1.0)  # Gibt die Berechnung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
 
 
-# Aufgabe 2 aus C01 in 2 verschiedenen Varianten.
+# Diese Funktion berechnet S2 rekursiv und gibt dies zurück
+def s2_dp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
+    # Wenn n größer als N geworden ist, dann gib 0 zurück
+    if n > N:
+        return 0.0
+    # Wenn n kleiner als N ist, dann führe die Berechnung aus
+    else:
+        n = float(n)  # n in float für doppelte Genauigkeit umrechnen
+        cal = 1.0 / (2.0 * n * ((2.0 * n) + 1.0))  # Berechnung(calculation)
+        return cal + s2_dp_recursive(N, n + 1.0)  # Gibt die Berechnung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
+
+
+# Diese Funktion berechnet SN1 rekursiv und gibt dies zurück
+def s1_sp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
+    # Wenn n größer als 2N geworden ist, dann gib 0 zurück
+    if n > (2 * N):
+        return np.float32(0.0)
+    # Wenn n kleiner als 2N ist, dann führe die Berechnung aus
+    else:
+        n = np.float32(n)  # n in float für doppelte Genauigkeit umrechnen
+        cal = np.float32(pow((-1.0), n)) * (n / (n + np.float32(1.0)))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1))
+        return cal + s1_dp_recursive(N, n + 1.0)  # Gibt die Berechnung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
+
+
+# Diese Funktion berechnet S2 rekursiv und gibt dies zurück
+def s2_sp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
+    # Wenn n größer als N geworden ist, dann gib 0 zurück
+    if n > N:
+        return np.float32(0.0)
+    # Wenn n kleiner als N ist, dann führe die Berechnung aus
+    else:
+        n = np.float32(n)  # n in float für doppelte Genauigkeit umrechnen
+        cal = np.float32(1.0) / (np.float32(2.0) * n * ((np.float32(2.0) * n) + np.float32(1.0)))  # Berechnung(calculation)
+        return cal + s2_dp_recursive(N, n + 1.0)  # Gibt die Berechnung aus und addiere mit der Nachfolgefunktion (Rekursion mit n+1)
+
+
+# Aufgabe 3 aus C01 mit doppelter und einfacher Genauigkeit Varianten.
 # Diese Funktion berechnet SN1 rekursiv und gibt dies zurück
 def s1_sp(N):  # N wird als Parameter eingeben
     s1 = np.array([np.float32(0.0)])  # Initialisiere das Ergebnisarray mit dem Wert 0 (0 als einfache Genauigkeit)
@@ -65,6 +112,7 @@ def ratios(s1_array, s2_array):
     else:
         raise ValueError("Länge der Arrays nicht gleich!")
 
+
 # Diese Funktion erweitert die SN Aufgabe, indem hier nach einem Input gefragt wird für N
 def input_n():
     # Solange der Input nicht korrekt ist, wird die Schleife immer wieder durchlaufen
@@ -82,6 +130,12 @@ def input_n():
 if __name__ == "__main__":
     N = input_n()
 
+    print(f"Einfache Genauigkeit für N = {N}:")
+    print(f"S1:{s1_sp_recursive(N)}")
+    print(f"S2:{s2_sp_recursive(N)}")
+    print(f"Doppelte Genauigkeit für N = {N}:")
+    print(f"S1:{s1_dp_recursive(N)}")
+    print(f"S2:{s2_dp_recursive(N)}")
     N_values = np.arange(1, N + 1, 1)  # Liste von N werten erzeugen
 
     # log-log-Plot erstellen
