@@ -65,9 +65,22 @@ def ratios(s1_array, s2_array):
     else:
         raise ValueError("Länge der Arrays nicht gleich!")
 
+# Diese Funktion erweitert die SN Aufgabe, indem hier nach einem Input gefragt wird für N
+def input_n():
+    # Solange der Input nicht korrekt ist, wird die Schleife immer wieder durchlaufen
+    while True:
+        userInput = input("Geben Sie N ein (>=1): ")  # Input vom Nutzer
+        # Überprüfen, ob die Eingabe eine Zahl ist und größer 0
+        if userInput.isdigit() and int(userInput) >= 1:
+            N = int(userInput)  # Nehme den Userinput als N und wandele diesen in einen Integer Wert um
+            print(f"Die Eingabe war N = {N}")
+            return N  # Rückgabe von N, wenn eine gültige Eingabe gemacht wurde
+        # Wenn es keine positive Ganzzahl war, dann gib Fehler aus und starte die Schleife von neuem
+        print("Ungültige Eingabe. Bitte geben Sie eine ganze Zahl größer als 1 ein.")
+
 
 if __name__ == "__main__":
-    N = 100
+    N = input_n()
 
     N_values = np.arange(1, N + 1, 1)  # Liste von N werten erzeugen
 
