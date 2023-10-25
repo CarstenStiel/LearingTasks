@@ -19,7 +19,7 @@ def recursive_trapezoidal_integration (func, a, b, n):
 
 a = 0.0  # Untere Grenze des Integrals
 b = 1.0  # Obere Grenze des Integrals
-n = input_n ()  # Anzahl der Subintervalle (rekursive Tiefe)
+n = 5   # Anzahl der Subintervalle (rekursive Tiefe)
 
-result = recursive_trapezoidal_integration(lambda x: y_n(x, n), a, b, n)  # Hier wird n = 2 verwendet
+result = recursive_trapezoidal_integration(lambda x: y_n(x, 2), a, b, n)  # Hier wird n = 2 verwendet
 print(f"Das Integral von y_n(x) von {a} bis {b} für n = 2 ist etwa {result}")
