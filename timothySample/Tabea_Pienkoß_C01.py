@@ -1,3 +1,12 @@
+"""
+AUTHOR
+    Tabea Pienkoß
+
+VERSION
+    1.0
+
+Aufgabe C01: Analytische Äquivalenz und numerische Genauigkeit
+"""
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,10 +16,10 @@ import matplotlib.pyplot as plt
 # Hier wird anstelle eines Array eine spezifische S-Funktion berechnet mithilfe von Rekursion (doppelte Genauigkeit).
 # Diese Funktion berechnet SN1 rekursiv und gibt dies zurück
 def s1_dp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
-    # Wenn n größer als 2N geworden ist, dann gib 0 zurück
+    # Wenn n größer als 2·N geworden ist, dann gib 0 zurück
     if n > (2 * N):
         return 0.0
-    # Wenn n kleiner als 2N ist, dann führe die Berechnung aus
+    # Wenn n kleiner als 2·N ist, dann führe die Berechnung aus
     else:
         n = float(n)  # n in float für doppelte Genauigkeit umrechnen
         cal = pow((-1.0), n) * (n / (n + 1.0))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1))
@@ -31,10 +40,10 @@ def s2_dp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 
 
 # Diese Funktion berechnet SN1 rekursiv und gibt dies zurück
 def s1_sp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll
-    # Wenn n größer als 2N geworden ist, dann gib 0 zurück
+    # Wenn n größer als 2·N geworden ist, dann gib 0 zurück
     if n > (2 * N):
         return np.float32(0.0)
-    # Wenn n kleiner als 2N ist, dann führe die Berechnung aus
+    # Wenn n kleiner als 2·N ist, dann führe die Berechnung aus
     else:
         n = np.float32(n)  # n in float für doppelte Genauigkeit umrechnen
         cal = np.float32(pow((-1.0), n)) * (n / (n + np.float32(1.0)))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1))
@@ -58,8 +67,8 @@ def s2_sp_recursive(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 
 def s1_sp(N):  # N wird als Parameter eingeben
     s1 = np.array([np.float32(0.0)])  # Initialisiere das Ergebnisarray mit dem Wert 0 (0 als einfache Genauigkeit)
     for i in range(1, N + 1):  # Für jedes n(i) von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
-        # Da wir nur bis N rechnen, 2N aber benötigt wird, wird hier mit n und n + 1 gerechnet
-        n = np.float32(2 * (i - 1) + 1)  # Da wir für 2N rechnen (doppelte berechnung ausführen) folgt → i = 1, dann rechnen wir n = 1 und 2 aus; i = 2, dann rechnen wir n = 3 und 4 aus, etc.
+        # Da wir nur bis N rechnen, 2·N aber benötigt wird, wird hier mit n und n + 1 gerechnet
+        n = np.float32(2 * (i - 1) + 1)  # Da wir für 2·N rechnen (doppelte berechnung ausführen) folgt → i = 1, dann rechnen wir n = 1 und 2 aus; i = 2, dann rechnen wir n = 3 und 4 aus, etc.
         cal1 = np.float32(np.float32(pow(-1, n)) * n / (n + 1.0))  # Berechnung von S1 für n
         cal2 = cal1 + np.float32(np.float32(pow(-1, n + 1)) * (n + 1.0) / (n + 2.0))  # Berechnung von S1 für n + 1, welches dann auf die vorherige Rechnung addiert wird
         res = s1[-1] + cal2  # Addiere S1 mit n und n + 1 für das nächste kleinere S1 zusammen
@@ -70,7 +79,7 @@ def s1_sp(N):  # N wird als Parameter eingeben
 # S2 mit einfacher Genauigkeit (single precision) berechnen → die einzelnen Variabelen muss mit float32 in einfache Genauigkeit umgerechnet werden!
 def s2_sp(N):  # N wird als Parameter eingeben
     s2 = np.array([np.float32(0.0)])  # Initialisiere das Ergebnisarray mit dem Wert 0 (0 als einfache Genauigkeit)
-    for i in range(1, N + 1):  # Für jedes n(i) von 1 bis 2N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
+    for i in range(1, N + 1):  # Für jedes n(i) von 1 bis 2·N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
         n = np.float32(i)  # n in einfache Genauigkeit umrechnen
         res = s2[-1] + np.float32(1.0 / (2.0 * n * ((2.0 * n) + 1.0)))  # Berechnung auf das Ergebnis nächst kleinere S2 addieren
         s2 = np.append(s2, res)  # Anhängen des Ergebnisses an das Lösungsarray
@@ -82,8 +91,9 @@ def s2_sp(N):  # N wird als Parameter eingeben
 def s1_dp(N):  # N wird als Parameter eingeben
     s1 = np.array([0.0])  # Initialisiere das Ergebnisarray(result) mit dem Wert 0
     for i in range(1, N + 1):  # Für jedes n(i) von 1 bis N + 1 führe die Berechnung aus (+1, da das Ende von range exklusiv ist)
-        # Da wir nur bis N rechnen, 2N aber benötigt wird, wird hier mit n und n + 1 gerechnet
-        n = float(2 * (i - 1) + 1)  # Da wir für 2N rechnen (doppelte berechnung ausführen) folgt → i = 1, dann rechnen wir n = 1 und 2 aus; i = 2, dann rechnen wir n = 3 und 4 aus, etc.
+        # Da wir nur bis N rechnen, 2·N aber benötigt wird, wird hier mit n und n + 1 gerechnet
+        n = float(2 * (i - 1) + 1)  # Da wir für 2·N
+        # rechnen (doppelte berechnung ausführen) folgt → i = 1, dann rechnen wir n = 1 und 2 aus; i = 2, dann rechnen wir n = 3 und 4 aus, etc.
         cal1 = float(pow(-1.0, n)) * n / (n + 1.0)  # Berechnung von S1 für n
         cal2 = cal1 + float(pow(-1.0, n + 1)) * (n + 1.0) / (n + 2.0)  # Berechnung von S1 für n + 1 und addiere diese zusammen
         res = s1[-1] + cal2  # Addiere S1 mit n und n + 1 für das nächste kleinere S1 zusammen
