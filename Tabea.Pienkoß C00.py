@@ -9,7 +9,7 @@ def calculate_steps(start, stop, step):
 
     if step <= 0 and start <= stop:  # Fehler bei negativer Schrittweite und start kleiner stop
         raise ValueError("Die Schrittweite darf nicht 0 oder kleiner sein.")
-    elif step >= 0 and stop <= start:  # Fehler bei postiver Schrittweite und stop kleiner start
+    elif step >= 0 and stop <= start:  # Fehler bei positiver Schrittweite und stop kleiner start
         raise ValueError("Start muss größer als Stop sein.")
     else:  # Ansonsten, führe folgende While-Schleife aus
         while not current == stop:  # Solange, der derzeitige Wert kleiner ist als stop führe Folgendes aus:
@@ -26,8 +26,8 @@ if __name__ == '__main__':
     print(arr2)
     print(len(arr2))
 
-# Schrittweite mit Numpy
-arr1 = np.arange(start=2, stop=1000, step=0.7)
-print("Mit arange-Funktion")
-print(arr1)
-print(len(arr1))
+    # Schrittweite mit Numpy
+    arr1 = np.arange(start=2, stop=1000, step=0.7)
+    print("Mit arange-Funktion")
+    print(arr1)
+    print(len(arr1))
