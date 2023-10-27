@@ -3,7 +3,7 @@ AUTHOR
     Tabea Pienkoß
 
 VERSION
-    1.1
+    1.1.1
 
 Aufgabe C01
 """
@@ -148,7 +148,7 @@ def input_N():
             print("Ungültige Eingabe. Bitte geben Sie eine ganze Zahl >= 1 ein.")
 
 
-# Ausführung der eigentlichen Aufgaben, wenn dieses Skript als "main" ausgeführt wird:
+# Ausführung der eigentlichen Aufgaben, wenn dieses Skript als "__main__" ausgeführt wird:
 if __name__ == "__main__":
     N = input_N()  # Eingabe von N als Userinput.
 
