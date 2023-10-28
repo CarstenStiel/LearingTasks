@@ -12,61 +12,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# Definition der Funktionen:
 # Aufgabe 2)
-# Hier wird mithilfe von Rekursion ein spezifischer S-Wert berechnet.
-# Diese Funktion berechnet SN1 (einfache Genauigkeit) und gibt diesen Wert zurück.
-def s1_sp(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll.
-    # Wenn n größer als 2·N geworden ist, dann gib 0 zurück:
-    if n > (2 * N):
-        return np.float32(0.0)
-    # Wenn n kleiner als 2·N ist, dann führe die Berechnung aus:
-    else:
-        n = np.float32(n)  # n in float für doppelte Genauigkeit umrechnen.
-        cal = np.float32(pow((-1.0), n)) * (n / (n + np.float32(1.0)))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1)).
-        return cal + s1_dp(N, n + 1.0)  # Gibt die Berechnung aus bzw. addiere mit der Nachfolgefunktion (Rekursion mit n+1).
-
-
-# Diese Funktion berechnet S2 (einfache Genauigkeit) und gibt dies zurück.
-def s2_sp(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll.
-    # Wenn n größer als N geworden ist, dann gib 0 zurück:
-    if n > N:
-        return np.float32(0.0)
-    # Wenn n kleiner als N ist, dann führe die Berechnung aus:
-    else:
-        n = np.float32(n)  # n in float für doppelte Genauigkeit umrechnen.
-        cal = np.float32(1.0) / (np.float32(2.0) * n * ((np.float32(2.0) * n) + np.float32(1.0)))  # Berechnung(calculation).
-        return cal + s2_dp(N, n + 1.0)  # Gibt die Berechnung aus bzw. addiere mit der Nachfolgefunktion (Rekursion mit n+1).
-
-
-# Diese Funktion berechnet SN1 (doppelte Genauigkeit) und gibt dies zurück.
-# Wichtig: Die doppelte Genauigkeit ist bei Python von sich aus bei float gegeben und muss NICHT mit float64 erreicht werden
-def s1_dp(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll.
-    # Wenn n größer als 2·N geworden ist, dann gib 0 zurück:
-    if n > (2 * N):
-        return 0.0
-    # Wenn n kleiner als 2·N ist, dann führe die Berechnung aus:
-    else:
-        n = float(n)  # n in float für doppelte Genauigkeit umrechnen.
-        cal = pow((-1.0), n) * (n / (n + 1.0))  # Berechnung(calculation) = ((-1)^n)*(n / (n + 1)).
-        return cal + s1_dp(N, n + 1.0)  # Gibt die Berechnung aus bzw. addiere mit der Nachfolgefunktion (Rekursion mit n+1).
-
-
-# Diese Funktion berechnet S2 (doppelte Genauigkeit) und gibt dies zurück.
-def s2_dp(N, n=1.0):  # Nur N als Parameter eingeben, da n beim Start 1 bleiben soll.
-    # Wenn n größer als N geworden ist, dann gib 0 zurück:
-    if n > N:
-        return 0.0
-    # Wenn n kleiner als N ist, dann führe die Berechnung aus:
-    else:
-        n = float(n)  # n in float für doppelte Genauigkeit umrechnen.
-        cal = 1.0 / (2.0 * n * ((2.0 * n) + 1.0))  # Berechnung(calculation).
-        return cal + s2_dp(N, n + 1.0)  # Gibt die Berechnung aus bzw. addiere mit der Nachfolgefunktion (Rekursion mit n+1).
-
-
-# Aufgabe 3)
 # Idee und teile der Umsetzung für die Array-Funktion stammen von @V. Ivanov (die eigene Funktion mittels Rekursion für die Array erstellung, wurde aus Performance gründen nicht gewählt).
-# Berechne S1 und S2 mit einfacher und doppelter Genauigkeit als Array (für die Funktionswerte) und plotte die Funktion.
+# Berechne S1 und S2 mit einfacher und doppelter Genauigkeit als Array (für die Funktionswerte).
 # Diese Funktion berechnet das SN1-Array (einfache Genauigkeit) und gibt dies zurück.
 def s1_sp_arr(N):  # N wird als Parameter eingeben.
     s1 = np.array([np.float32(0.0)])  # Initialisiere das Ergebnisarray mit dem Wert 0 (0 als einfache Genauigkeit).
@@ -117,6 +65,8 @@ def s2_dp_arr(N):  # N als Parameter eingeben.
     return s2  # Wenn die For-Schleife durchlaufen wurde, dann gib das Ergebnisarray zurück.
 
 
+# Aufgabe 3)
+# Nutze für das Plotten der Funktion die Arrays aus Aufgabe 2, berechne die Funktionswerte und plotte die Funktion.
 # Diese Funktion berechnet die Funktionswerte.
 def ratios(s1_array, s2_array):  # Übergabe der Arrays von S1 und S2 als Parameter.
     func = np.array([])  # Initialisierung eines leeren Ergebnis-Arrays.
@@ -155,11 +105,11 @@ if __name__ == "__main__":
     # Aufgabe 2)
     # Ausgabe der einfachen und doppelten Genauigkeit für ein spezifisches S1 und S2.
     print(f"Einfache Genauigkeit für N = {N}:")
-    print(f"S1:{s1_sp(N)}")
-    print(f"S2:{s2_sp(N)}")
+    print(f"S1:{s1_sp_arr(N)[-1]}")
+    print(f"S2:{s2_sp_arr(N)[-1]}")
     print(f"Doppelte Genauigkeit für N = {N}:")
-    print(f"S1:{s1_dp(N)}")
-    print(f"S2:{s2_dp(N)}")
+    print(f"S1:{s1_dp_arr(N)[-1]}")
+    print(f"S2:{s2_dp_arr(N)[-1]}")
 
     # Aufgabe 3)
     # X Werte erstellen
