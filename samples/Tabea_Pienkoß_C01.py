@@ -3,7 +3,7 @@ AUTHOR
     Tabea Pienkoß
 
 VERSION
-    1.1.1
+    1.2.
 
 Aufgabe C01
 """
@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # Aufgabe 2)
 # Idee und teile der Umsetzung für die Array-Funktion stammen von @V. Ivanov.
 # Die eigene Funktion mittels Rekursion für die Array erstellung mittels For-Schleife, wurde aus Performance gründen und der Rekursionstiefe nicht gewählt.
-# Im Kommentar ist hier jedoch ein Ansatz
+# Im Kommentar ist hier jedoch ein Ansatz:
 """
 # Idee eines rekursiven Algorhythmus für die Berechnung eines spezifischen S
 # Hier wird anstelle eines Array eine spezifische S-Funktion berechnet mithilfe von Rekursion (doppelte Genauigkeit).
