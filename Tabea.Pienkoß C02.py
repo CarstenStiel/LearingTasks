@@ -46,3 +46,5 @@ plt.title('y_n(x) für verschiedene n')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+#funktioniert net ganz
