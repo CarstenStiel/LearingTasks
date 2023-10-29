@@ -3,9 +3,9 @@ AUTHOR
     Tabea Pienkoß
 
 VERSION
-    0.2.
+    1.0
 
-Aufgabe C01
+Aufgabe C02
 """
 # Imports:
 import math
@@ -14,7 +14,6 @@ import numpy as np
 
 
 # Definition der Funktionen:
-# Aufgabe C02).
 # Berechnungsterm stammt aus der Musterlösung "C02-Computerphysik-Ivanov.py".
 # Diese Funktion berechnet das Integral rekursiv und gibt dies als Array aus.
 def integral_rekursive_arr(n, arr=None):  # Derzeitiges n und Array als Parameter übergeben (Array soll bei erstmaligem Funktionsaufruf auf dem Defaultwert sein).
@@ -35,7 +34,7 @@ def integral_rekursive_arr(n, arr=None):  # Derzeitiges n und Array als Paramete
 
 
 # Zusatz:
-# Diese Funktion erweitert die C02 Aufgabe, indem hier nach einem Input gefragt wird für N, solange bis eine Ganzzahl 0 ≤ n < 999 gewählt wurde.
+# Diese Funktion erweitert die Aufgabe, indem hier nach einem Input gefragt wird für N, solange bis eine Ganzzahl 0 ≤ n < 999 gewählt wurde.
 # Das eingegebene n wird auf max. 999 beschränkt, aufgrund der Rekursionstiefe. Da ab n=384 die Berechnung nur inf für n ungerade und -inf für n gerade ausgibt, scheint dies vertretbar.
 def input_n():
     # Solange der Input nicht korrekt ist, wird die Schleife immer wieder durchlaufen:
@@ -51,7 +50,7 @@ def input_n():
             print("Ungültige Eingabe. Bitte geben Sie eine ganze Zahl ein mit 0 <= N < 999.")
 
 
-# Diese Funktion erweitert die C02 Aufgabe, indem hier gefragt wird, ob die n-Werte zusätzlich ausgegeben werden sollen.
+# Diese Funktion erweitert die Aufgabe, indem hier gefragt wird, ob die n-Werte zusätzlich ausgegeben werden sollen.
 def show_arr(n, arr):  # Das Array das ggf. angezeigt werden soll, als Parameter übergeben
     # Solange der Input nicht korrekt ist, wird die Schleife immer wieder durchlaufen:
     while True:
@@ -71,7 +70,6 @@ def show_arr(n, arr):  # Das Array das ggf. angezeigt werden soll, als Parameter
 
 # Ausführung der eigentlichen Aufgaben, wenn dieses Skript als "__main__" ausgeführt wird:
 if __name__ == "__main__":
-    # Aufgabe C02).
     n = input_n()  # Eingabe des n-Wertes.
     integral_arr = integral_rekursive_arr(n)
     print(f"Auswertung des Integrals für den n-Wert '{n}': {integral_arr[-1]}")  # Ausgabe des berechnetes Intergrals für den spezifischen n-Wert.
