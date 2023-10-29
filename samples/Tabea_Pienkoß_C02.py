@@ -39,15 +39,15 @@ def integral_rekursive_arr(n, arr=None):  # Derzeitiges n und Array als Paramete
 def input_n():
     # Solange der Input nicht korrekt ist, wird die Schleife immer wieder durchlaufen:
     while True:
-        userInput = input("Geben Sie N ein mit 0 <= N < 999: ")  # Input vom Nutzer.
+        userInput = input("Geben Sie n ein mit 0 <= n < 999: ")  # Input vom Nutzer.
         # Überprüfen, ob die Eingabe eine Zahl ist und 0 ≤ Eingabe < 999:
         if userInput.isdigit() and 0 <= int(userInput) < 999:
-            N = int(userInput)  # Nehme den Userinput als N und wandele diesen in einen Integer Wert um.
-            print(f"Die Eingabe war N = {N}")  # Ausgabe in der Konsole.
-            return N  # Rückgabe von N, wenn eine gültige Eingabe gemacht wurde.
+            n = int(userInput)  # Nehme den Userinput als n und wandele diesen in einen Integer Wert um.
+            print(f"Die Eingabe war n = {n}")  # Ausgabe in der Konsole.
+            return n  # Rückgabe von n, wenn eine gültige Eingabe gemacht wurde.
         # Wenn es keine positive Ganzzahl war, dann gib Fehler aus und starte die Schleife von neuem:
         else:
-            print("Ungültige Eingabe. Bitte geben Sie eine ganze Zahl ein mit 0 <= N < 999.")
+            print("Ungültige Eingabe. Bitte geben Sie eine ganze Zahl ein mit 0 <= n < 999.")
 
 
 # Diese Funktion erweitert die Aufgabe, indem hier gefragt wird, ob die n-Werte zusätzlich ausgegeben werden sollen.
