@@ -14,6 +14,7 @@ from scipy.integrate import quad
 import matplotlib.pyplot as plt
 
 
+# Teile der Funktionswerte und Funktionen wurden von @V. Ivanov aus "C16-Computerphysik-Ivanov.py" übernommen
 # Definition der Funktionen:
 # Diese Funktion berechnet die Funktion von C(u) für ein spezifisches t.
 def fC(t):
