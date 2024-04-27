@@ -1,16 +1,4 @@
 ﻿"""
-NAME
-    bins.py
-
-AUTHOR
-    V. Ivanov
-
-VERWENDUNG
-Computerübung im Seminar 2.
-
-Aufgabe C01: Analytische Äquivalenz und numerische Genauigkeit
-(in einer separaten Datei)
-
 QUELLEN
 W. Hergert: Aufgabendatenbank und Fortran-Programme
 O. Natt, Physik mit Python, 2.Aufl. (2019) + Programme in pyth.de
